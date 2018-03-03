@@ -1,0 +1,231 @@
+div.mod-ttm_diff_tool_otf ins
+{
+background-color: lightgreen;
+}
+
+div.mod-ttm_diff_tool_otf del
+{
+background-color: #E3A0AB;
+}
+
+.starting {
+font-size:2em !important;
+}
+.source_pack {
+font-size:1.2em;
+font-weight: bold;
+}
+
+.target_pack {
+font-size:1.2em;
+font-weight: bold;
+}
+
+.downloable_from {
+border-width: 1px;
+background: url("../images/down.png") no-repeat scroll 3px 3px #FFF5EB;
+border-bottom: 1px dotted #FFB4A0;
+border-top: 1px dotted #FFB4A0;
+margin: 10px 0;
+padding: 7px 10px 7px 35px;
+border-style: inset;
+border-color: gray;
+background-color: #FFFFC0;
+font-size:1.2em;
+-moz-border-radius: 0px 0px 0px 0px;
+}
+.starting_report {
+font-size:2em !important;
+font-weight: bold;
+color:#8B0000 !important;
+text-decoration: underline; 
+}
+.client_admin {
+background-color: #FF9966;
+color:black !important;
+border: 1px dashed gray;
+font-size: 2.4em !important;
+}
+.client_site {
+color:black !important;
+background-color: #CCFFFF;
+border: 1px dashed gray;
+font-size: 2.4em !important;
+}
+.client_installation {
+color:black !important;
+background-color: #FFFF99;
+border: 1px dashed gray;
+font-size: 2.4em !important;
+}
+.files_to_delete {
+font-size: 1.5em;
+font-weight: bold;
+color:#8B0000 !important;
+}
+.file_to_delete {
+color:red;
+}
+.files_to_add {
+font-size: 1.5em;
+font-weight: bold;
+color:#8B0000 !important;
+}
+
+.show_common_files {
+font-size: 1.5em;
+color:black !important;
+}
+
+.common_file_diff {
+border: 1px dashed gray;
+background-color: #FFFFCC;
+margin-top: 1.4em;
+}
+
+.file_to_add {
+color:green;
+}
+
+.new_file {
+font-size: 1.3em;
+color:black !important;
+margin-bottom: -1em;
+margin-top:2em;
+}
+
+
+.new_word {
+color:#8B0000 !important;
+}
+
+.new_file_content {
+border: 1px dashed gray;
+background-color: #CCFF99;
+margin-top: 1.4em;
+}
+
+.show_new_files {
+font-size: 1.5em;
+color:black !important;
+}
+.diff_del {
+background-color: #E3A0AB !important;
+}
+
+.diff_ins {
+background-color: lightgreen !important;
+}
+
+.keys_to_add {
+font-size: 1.2em;
+color:green !important;
+text-decoration: underline;
+margin-top:2em;
+}
+.key_to_add {
+background-color: #CCFFCC !important;
+font-size: 1.1em;
+}
+
+.keys_to_delete {
+font-size: 1.2em;
+color:red !important;
+text-decoration: underline;
+margin-top:2em;
+}
+.key_to_delete {
+background-color: #FFCCCC !important;
+font-size: 1.1em;
+}
+
+.comments_to_add {
+font-size: 1.2em;
+color:green !important;
+text-decoration: underline;
+margin-top:2em;
+}
+.comment_to_add {
+background-color: #CCFFCC !important;
+font-size: 1.1em;
+}
+
+.comments_to_delete {
+font-size: 1.2em;
+color:red !important;
+text-decoration: underline;
+margin-top:2em;
+}
+.comment_to_delete {
+background-color: #FFCCCC !important;
+font-size: 1.1em;
+}
+
+.sections_to_add {
+font-size: 1.2em;
+color:green !important;
+text-decoration: underline;
+margin-top:2em;
+}
+.section_to_add {
+background-color: #CCFFCC !important;
+font-size: 1.1em;
+}
+
+.sections_to_delete {
+font-size: 1.2em;
+color:red !important;
+text-decoration: underline;
+margin-top:2em;
+}
+.section_to_delete {
+background-color: #FFCCCC !important;
+font-size: 1.1em;
+}
+
+.keys_to_move {
+font-size: 1.2em;
+color:blue !important;
+text-decoration: underline;
+margin-top:2em;
+}
+
+.key_to_move {
+background-color: #CCFFFF !important;
+font-size: 1.1em;
+}
+
+.keys_to_move_and_revise {
+font-size: 1.2em;
+color:purple !important;
+text-decoration: underline;
+margin-top:2em;
+}
+
+.key_to_move_and_revise {
+background-color: #CC99CC !important;
+font-size: 1.1em;
+}
+
+.keys_to_revise {
+font-size: 1.2em;
+color:orange !important;
+text-decoration: underline;
+margin-top:2em;
+}
+
+.key_to_revise {
+background-color: orange !important;
+font-size: 1.1em;
+}
+
+.text_changes {
+border: 1px dashed gray !important;
+background-color: #FFFFCC;
+margin-top: -0.6em;
+}
+
+.line_number {
+font-size: 1.1em;
+color:black !important;
+}
