@@ -8,7 +8,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
-require_once dirname(__FILE__).'/helper.php';
+require_once dirname(__FILE__) . '/helper.php';
 
 $diff_info = modTtm_diff_tool_otfHelper::get_Diff_Info($params);
 
