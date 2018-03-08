@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension
-	type="module"
-	version="3.3"
-	client="site"
-	method="upgrade">
+	type="module" version="3.8" client="site" method="upgrade">
 	<name>mod_ttm_diff_tool_otf</name>
 	<author>Valc (Rafa Gómez)</author>
 	<creationDate>Aug 2013</creationDate>
 	<copyright>Copyright (C) 2011-2013 comunidadjoomla.org. All rights reserved.</copyright>
+	<copyright>Copyright (C) 2018 Open Source Matters. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-	<authorEmail>info@comunidadjoomla.org</authorEmail>
-	<authorUrl>www.comunidadjoomla.org</authorUrl>
-	<version>3.3.6</version>
+	<authorEmail></authorEmail>
+	<authorUrl></authorUrl>
+	<version>3.8.6</version>
 	<description><![CDATA[
 		<h2>The module has been successfully installed in Joomla 3 series</h2>
 		This tool provide an easy way to know the changes applied between core language files revisions, getting the info on the fly from the full packages than we have allowed by module configuration.<br/><br/>Features:<br/>
@@ -19,26 +17,25 @@
 		<li>Very specific tool for the TT Members job: Handle core language files changes.</li>
 		<li>Easy and fast configuration.</li>
 		<li>Client by client (administrator, site and installation) language selection to reports the diff is available.</li>
-		<li>Setting a baseline package we can test easy the diff vs last LTS or STS releases (from GitHUB or Joomla.org Project).</li>
+		<li>Setting a baseline package we can test easy the diff different releases (from GitHUB or Joomla.org Project).</li>
 		<li>Files to add or delete are reported.</li>
 		<li>Keys to add, delete, revise or move are reported.</li>
 		<li>Non ini files (xml, en-GB.localise.php, etc) also can report the diff if present.</li>
 		<li>Commented lines and sections diff is also handled.</li>
 		<li>Reports with more exactitud than at GitHub. For example: Keys "to move", "to move and revise" or "text changes" improvemments</li>
 		<li>The reported and "easy to follow" info can to be displayed using normal joomla output inside an article.</li>
-		<li>Using custom URLs the module can display the diff from 1.6.x series to the last one released.</li>
+		<li>Using custom URLs the module can display the diff from any release (including -dev, alpha, beta) to the previous release.</li>
 		<li>Allow store and handle history with the reported diff between same calls.</li>
-		<li>SHA ID is displayed when knowed Github URL pattern is detected.</li>
-		<li>And few more details at the reported info that can to help when... TT Members Rock 'n' Roll time start! :D</li>
+		<li>SHA ID is displayed when knowned Github URL pattern is detected.</li>
+		<li>And few more details at the reported info that can help when... TT Members Rock 'n' Roll time start! :D</li>
 		</ol>
 		<p></p>
 		<p></p>
-		<p>Please, if you have found bugs at the module, report the issues at info@comunidadjoomla.org</p>
 		<p></p>
 		<p></p>
 		<p>Enjoy it!</p>
-		<p>The STAFF of ComunidadJoomla.org</p>
-		]]></description>
+		]]>
+	</description>
 	<media destination="mod_ttm_diff_tool_otf" folder="media">
 		<filename>index.html</filename>
 		<folder>images</folder>
@@ -57,224 +54,114 @@
 	</files>
 
 	<config>
-
-		<languages folder="language">
-			<language tag="en-GB">en-GB.mod_ttm_diff_tool_otf.ini</language>
-			<language tag="en-GB">en-GB.mod_ttm_diff_tool_otf.sys.ini</language>
-			<language tag="es-ES">es-ES.mod_ttm_diff_tool_otf.ini</language>
-			<language tag="es-ES">es-ES.mod_ttm_diff_tool_otf.sys.ini</language>
-		</languages>
-
 		<fields name="params">
-
 			<fieldset name="basic">
-
 				<field
 					name="spacer"
 					type="spacer"
 					class="text"
-					label="MOD_TTM_DIFF_TOOL_OTF_REQUIRED_FIELDS_SPACER_LABEL"/>
-
-				<field name="spacer1" type="spacer"
-					hr="true"/>
+					label="MOD_TTM_DIFF_TOOL_OTF_REQUIRED_FIELDS_SPACER_LABEL"
+				/>
 
 				<field
+					name="spacer1"
+					type="spacer"
+					hr="true"
+				/>
+
+        		<field 
 					name="client_selection"
 					type="checkboxes"
-					size="3"
+					size= "3"
 					default="admin_selected"
 					label="MOD_TTM_DIFF_TOOL_OTF_CLIENT_SELECTION_LABEL"
 					description="MOD_TTM_DIFF_TOOL_OTF_CLIENT_SELECTION_DESC"
 					required="true">
-					<option
-						value="admin_selected">MOD_TTM_DIFF_TOOL_OTF_CLIENT_SELECTION_ADMIN_SELECTED
-					</option>
-					<option
-						value="site_selected">MOD_TTM_DIFF_TOOL_OTF_CLIENT_SELECTION_SITE_SELECTED
-					</option>
-					<option
-						value="installation_selected">MOD_TTM_DIFF_TOOL_OTF_CLIENT_SELECTION_INSTALLATION_SELECTED
-					</option>
-				</field>
+                			<option
+						value="admin_selected">MOD_TTM_DIFF_TOOL_OTF_CLIENT_SELECTION_ADMIN_SELECTED</option>
+                			<option
+						value="site_selected">MOD_TTM_DIFF_TOOL_OTF_CLIENT_SELECTION_SITE_SELECTED</option>
+                			<option
+						value="installation_selected">MOD_TTM_DIFF_TOOL_OTF_CLIENT_SELECTION_INSTALLATION_SELECTED</option>
+        		</field>
 
 				<field
 					name="source_revision"
 					type="list"
-					default="STS_FROZEN_3_3_6"
+					default="STS_FROZEN_3.8.5"
 					label="MOD_TTM_DIFF_TOOL_OTF_SOURCE_REVISION_LABEL"
 					description="MOD_TTM_DIFF_TOOL_OTF_SOURCE_REVISION_DESC"
 					required="true">
+					<option 
+						value="CUSTOM_SR">MOD_TTM_DIFF_TOOL_OTF_SR_OPTION_CUSTOM</option>
 					<option
-						value="CUSTOM_SR">MOD_TTM_DIFF_TOOL_OTF_SR_OPTION_CUSTOM
-					</option>
+						value="STS_FROZEN_3_8_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_5</option>
 					<option
-						value="LTS_DEV">MOD_TTM_DIFF_TOOL_OTF_SR_OPTION_LTS_DEV
-					</option>
+						value="STS_FROZEN_3_8_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_4</option>
 					<option
-						value="STS_DEV">MOD_TTM_DIFF_TOOL_OTF_SR_OPTION_STS_DEV
-					</option>
+						value="STS_FROZEN_3_8_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_3</option>
 					<option
-						value="LTS_FROZEN_2_5_28">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_28
-					</option>
+						value="STS_FROZEN_3_8_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_2</option>
 					<option
-						value="LTS_FROZEN_2_5_27">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_27
-					</option>
+						value="STS_FROZEN_3_8_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_1</option>
 					<option
-						value="LTS_FROZEN_2_5_26">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_26
-					</option>
+						value="STS_FROZEN_3_8_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_0</option>
 					<option
-						value="LTS_FROZEN_2_5_25">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_25
-					</option>
+						value="STS_FROZEN_3_7_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_7_0</option>
 					<option
-						value="LTS_FROZEN_2_5_24">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_24
-					</option>
+						value="STS_FROZEN_3_6_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_6_0</option>
 					<option
-						value="LTS_FROZEN_2_5_23">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_23
-					</option>
+						value="STS_FROZEN_3_5_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_5_0</option>
 					<option
-						value="LTS_FROZEN_2_5_22">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_22
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_21">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_21
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_20">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_20
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_19">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_19
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_18">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_18
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_17">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_17
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_16">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_16
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_15">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_15
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_14">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_14
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_13">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_13
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_12">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_12
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_11">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_11
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_10">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_10
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_9">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_9
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_8">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_8
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_7">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_7
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_6">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_6
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_5
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_4
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_3
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_2
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_1
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_0
-					</option>
-					<option
-						value="STS_FROZEN_3_4_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_4_0
-					</option>
-					<option
-						value="STS_FROZEN_3_3_6">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_6
-					</option>
-					<option
-						value="STS_FROZEN_3_3_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_5
-					</option>
-					<option
-						value="STS_FROZEN_3_3_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_4
-					</option>
-					<option
-						value="STS_FROZEN_3_3_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_3
-					</option>
-					<option
-						value="STS_FROZEN_3_3_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_2
-					</option>
-					<option
-						value="STS_FROZEN_3_3_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_1
-					</option>
-					<option
-						value="STS_FROZEN_3_3_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_0
-					</option>
-					<option
-						value="STS_FROZEN_3_2_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_3
-					</option>
-					<option
-						value="STS_FROZEN_3_2_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_2
-					</option>
-					<option
-						value="STS_FROZEN_3_2_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_1
-					</option>
-					<option
-						value="STS_FROZEN_3_2_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_0
-					</option>
-					<option
-						value="STS_FROZEN_3_1_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_5
-					</option>
-					<option
-						value="STS_FROZEN_3_1_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_4
-					</option>
-					<option
-						value="STS_FROZEN_3_1_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_3
-					</option>
-					<option
-						value="STS_FROZEN_3_1_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_2
-					</option>
-					<option
-						value="STS_FROZEN_3_1_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_1
-					</option>
-					<option
-						value="STS_FROZEN_3_1_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_0
-					</option>
-					<option
-						value="STS_FROZEN_3_0_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_3
-					</option>
-					<option
-						value="STS_FROZEN_3_0_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_2
-					</option>
-					<option
-						value="STS_FROZEN_3_0_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_1
-					</option>
-					<option
-						value="STS_FROZEN_3_0_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_0
-					</option>
+						value="STS_FROZEN_3_4_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_4_0</option>
+					<option 
+						value="STS_FROZEN_3_3_6">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_6</option>
+					<option 
+						value="STS_FROZEN_3_3_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_5</option>
+					<option 
+						value="STS_FROZEN_3_3_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_4</option>
+					<option 
+						value="STS_FROZEN_3_3_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_3</option>
+					<option 
+						value="STS_FROZEN_3_3_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_2</option>
+					<option 
+						value="STS_FROZEN_3_3_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_1</option>
+					<option 
+						value="STS_FROZEN_3_3_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_0</option>
+					<option 
+						value="STS_FROZEN_3_2_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_3</option>
+					<option 
+						value="STS_FROZEN_3_2_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_2</option>
+					<option 
+						value="STS_FROZEN_3_2_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_1</option>
+					<option 
+						value="STS_FROZEN_3_2_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_0</option>
+					<option 
+						value="STS_FROZEN_3_1_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_5</option>
+					<option 
+						value="STS_FROZEN_3_1_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_4</option>
+					<option 
+						value="STS_FROZEN_3_1_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_1</option>
+					<option 
+						value="STS_FROZEN_3_1_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_0</option>
+					<option 
+						value="STS_FROZEN_3_0_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_3</option>
+					<option 
+						value="STS_FROZEN_3_0_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_2</option>
+					<option 
+						value="STS_FROZEN_3_0_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_1</option>
+					<option 
+						value="STS_FROZEN_3_0_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_0</option>
 
 				</field>
+
 				<field
 					name="custom_source_revision"
 					type="url"
 					default=""
 					label="MOD_TTM_DIFF_TOOL_OTF_SR_CUSTOM_VALUE_LABEL"
-					description="MOD_TTM_DIFF_TOOL_OTF_SR_CUSTOM_VALUE_DESC"/>
-
+					description="MOD_TTM_DIFF_TOOL_OTF_SR_CUSTOM_VALUE_DESC"
+				/>
 
 				<field
 					name="target_revision"
@@ -283,187 +170,96 @@
 					label="MOD_TTM_DIFF_TOOL_OTF_TARGET_REVISION_LABEL"
 					description="MOD_TTM_DIFF_TOOL_OTF_TARGET_REVISION_DESC"
 					required="true">
+					<option 
+						value="CUSTOM_TR">MOD_TTM_DIFF_TOOL_OTF_TR_OPTION_CUSTOM</option>
+					<option 
+						value="STS_DEV">MOD_TTM_DIFF_TOOL_OTF_TR_OPTION_STS_DEV</option>
 					<option
-						value="CUSTOM_TR">MOD_TTM_DIFF_TOOL_OTF_TR_OPTION_CUSTOM
-					</option>
+						value="STS_FROZEN_3_8_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_5</option>
 					<option
-						value="LTS_DEV">MOD_TTM_DIFF_TOOL_OTF_TR_OPTION_LTS_DEV
-					</option>
+						value="STS_FROZEN_3_8_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_4</option>
 					<option
-						value="STS_DEV">MOD_TTM_DIFF_TOOL_OTF_TR_OPTION_STS_DEV
-					</option>
+						value="STS_FROZEN_3_8_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_3</option>
 					<option
-						value="LTS_FROZEN_2_5_28">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_28
-					</option>
+						value="STS_FROZEN_3_8_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_2</option>
 					<option
-						value="LTS_FROZEN_2_5_27">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_27
-					</option>
+						value="STS_FROZEN_3_8_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_1</option>
 					<option
-						value="LTS_FROZEN_2_5_26">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_26
-					</option>
+						value="STS_FROZEN_3_8_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_0</option>
 					<option
-						value="LTS_FROZEN_2_5_25">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_25
-					</option>
+						value="STS_FROZEN_3_7_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_7_0</option>
 					<option
-						value="LTS_FROZEN_2_5_24">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_24
-					</option>
+						value="STS_FROZEN_3_6_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_6_0</option>
 					<option
-						value="LTS_FROZEN_2_5_23">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_23
-					</option>
+						value="STS_FROZEN_3_5_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_5_0</option>
 					<option
-						value="LTS_FROZEN_2_5_22">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_22
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_21">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_21
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_20">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_20
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_19">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_19
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_18">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_18
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_17">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_17
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_16">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_16
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_15">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_15
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_14">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_14
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_13">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_13
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_12">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_12
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_11">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_11
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_10">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_10
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_9">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_9
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_8">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_8
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_7">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_7
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_6">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_6
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_5
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_4
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_3
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_2
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_1
-					</option>
-					<option
-						value="LTS_FROZEN_2_5_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_LTS_FROZEN_2_5_0
-					</option>
-					<option
-						value="STS_FROZEN_3_4_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_4_0
-					</option>
-					<option
-						value="STS_FROZEN_3_3_6">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_6
-					</option>
-					<option
-						value="STS_FROZEN_3_3_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_5
-					</option>
-					<option
-						value="STS_FROZEN_3_3_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_4
-					</option>
-					<option
-						value="STS_FROZEN_3_3_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_3
-					</option>
-					<option
-						value="STS_FROZEN_3_3_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_2
-					</option>
-					<option
-						value="STS_FROZEN_3_3_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_1
-					</option>
-					<option
-						value="STS_FROZEN_3_3_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_0
-					</option>
-					<option
-						value="STS_FROZEN_3_2_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_3
-					</option>
-					<option
-						value="STS_FROZEN_3_2_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_2
-					</option>
-					<option
-						value="STS_FROZEN_3_2_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_1
-					</option>
-					<option
-						value="STS_FROZEN_3_2_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_0
-					</option>
-					<option
-						value="STS_FROZEN_3_1_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_5
-					</option>
-					<option
-						value="STS_FROZEN_3_1_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_4
-					</option>
-					<option
-						value="STS_FROZEN_3_1_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_3
-					</option>
-					<option
-						value="STS_FROZEN_3_1_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_2
-					</option>
-					<option
-						value="STS_FROZEN_3_1_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_1
-					</option>
-					<option
-						value="STS_FROZEN_3_1_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_0
-					</option>
-					<option
-						value="STS_FROZEN_3_0_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_3
-					</option>
-					<option
-						value="STS_FROZEN_3_0_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_2
-					</option>
-					<option
-						value="STS_FROZEN_3_0_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_1
-					</option>
-					<option
-						value="STS_FROZEN_3_0_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_0
-					</option>
+						value="STS_FROZEN_3_4_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_4_0</option>
+					<option 
+						value="STS_FROZEN_3_3_6">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_6</option>
+					<option 
+						value="STS_FROZEN_3_3_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_5</option>
+					<option 
+						value="STS_FROZEN_3_3_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_4</option>
+					<option 
+						value="STS_FROZEN_3_3_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_3</option>
+					<option 
+						value="STS_FROZEN_3_3_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_2</option>
+					<option 
+						value="STS_FROZEN_3_3_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_1</option>
+					<option 
+						value="STS_FROZEN_3_3_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_0</option>
+					<option 
+						value="STS_FROZEN_3_2_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_3</option>
+					<option 
+						value="STS_FROZEN_3_2_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_2</option>
+					<option 
+						value="STS_FROZEN_3_2_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_1</option>
+					<option 
+						value="STS_FROZEN_3_2_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_0</option>
+					<option 
+						value="STS_FROZEN_3_1_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_5</option>
+					<option 
+						value="STS_FROZEN_3_1_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_4</option>
+					<option 
+						value="STS_FROZEN_3_1_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_1</option>
+					<option 
+						value="STS_FROZEN_3_1_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_0</option>
+					<option 
+						value="STS_FROZEN_3_0_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_3</option>
+					<option 
+						value="STS_FROZEN_3_0_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_2</option>
+					<option 
+						value="STS_FROZEN_3_0_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_1</option>
+					<option 
+						value="STS_FROZEN_3_0_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_0</option>
 				</field>
+
 				<field
 					name="custom_target_revision"
 					type="url"
 					default=""
 					label="MOD_TTM_DIFF_TOOL_OTF_TR_CUSTOM_VALUE_LABEL"
-					description="MOD_TTM_DIFF_TOOL_OTF_TR_CUSTOM_VALUE_DESC"/>
+					description="MOD_TTM_DIFF_TOOL_OTF_TR_CUSTOM_VALUE_DESC"
+				/>
 
-				<field name="spacer2" type="spacer"
-					hr="true"/>
+				<field
+					name="spacer2"
+					type="spacer"
+					hr="true"
+				/>
 
 				<field
 					name="spacer3"
 					type="spacer"
 					class="text"
-					label="MOD_TTM_DIFF_TOOL_OTF_HISTORY_OPTIONS_LABEL"/>
+					label="MOD_TTM_DIFF_TOOL_OTF_HISTORY_OPTIONS_LABEL"
+				/>
 
-				<field name="spacer4" type="spacer"
-					hr="true"/>
+				<field
+					name="spacer4"
+					type="spacer"
+					hr="true"
+				/>
 
 				<field
 					name="allow_history"
@@ -472,11 +268,9 @@
 					label="MOD_TTM_DIFF_TOOL_OTF_ALLOW_HISTORY_LABEL"
 					description="MOD_TTM_DIFF_TOOL_OTF_ALLOW_HISTORY_DESC">
 					<option
-						value="1">MOD_TTM_DIFF_TOOL_OTF_OPTION_YES
-					</option>
+						value="1">MOD_TTM_DIFF_TOOL_OTF_OPTION_YES</option>
 					<option
-						value="0">MOD_TTM_DIFF_TOOL_OTF_OPTION_NO
-					</option>
+						value="0">MOD_TTM_DIFF_TOOL_OTF_OPTION_NO</option>
 				</field>
 
 				<field name="allowed_groups" type="usergroup"
@@ -492,24 +286,26 @@
 					type="text"
 					default=""
 					label="MOD_TTM_DIFF_TOOL_OTF_ECP_LABEL"
-					description="MOD_TTM_DIFF_TOOL_OTF_ECP_DESC"/>
-
+					description="MOD_TTM_DIFF_TOOL_OTF_ECP_DESC"
+				/>
 
 			</fieldset>
 
 			<fieldset name="advanced">
-
 				<field
 					name="layout"
 					type="modulelayout"
 					label="JFIELD_ALT_LAYOUT_LABEL"
-					description="MOD_TTM_DIFF_TOOL_OTF_FIELD_MODULE_LAYOUT_DESC"/>
+					description="MOD_TTM_DIFF_TOOL_OTF_FIELD_MODULE_LAYOUT_DESC"
+				/>
 
 				<field
 					name="moduleclass_sfx"
 					type="text"
 					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
-					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"/>
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"
+				/>
+
 				<field
 					name="cache"
 					type="list"
@@ -517,20 +313,19 @@
 					label="COM_MODULES_FIELD_CACHING_LABEL"
 					description="COM_MODULES_FIELD_CACHING_DESC">
 					<option
-						value="1">JGLOBAL_USE_GLOBAL
-					</option>
+						value="1">JGLOBAL_USE_GLOBAL</option>
 					<option
-						value="0">COM_MODULES_FIELD_VALUE_NOCACHING
-					</option>
+						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
 				</field>
-
+				
 				<field
 					name="cache_time"
 					type="text"
 					default="900"
 					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
-					description="COM_MODULES_FIELD_CACHE_TIME_DESC"/>
-
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC"
+				/>
+					
 				<field
 					name="cachemode"
 					type="hidden"
@@ -538,7 +333,6 @@
 					<option
 						value="itemid"></option>
 				</field>
-
 			</fieldset>
 		</fields>
 	</config>
