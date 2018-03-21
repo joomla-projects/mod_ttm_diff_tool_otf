@@ -11,33 +11,29 @@
 	<authorUrl></authorUrl>
 	<version>3.8.6</version>
 	<description><![CDATA[
-		<h2>The module has been successfully installed in Joomla 3 series</h2>
-		This tool provide an easy way to know the changes applied between core language files revisions, getting the info on the fly from the full packages than we have allowed by module configuration.<br/><br/>Features:<br/>
+		<h2>The module has been successfully installed in the Joomla 3 series</h2>
+		This tool provide an easy way to know the changes applied between core language files revisions, getting the info on the fly from the full packages depending on the module configuration.<br/><br/>Features:<br/>
 		<ol>
-		<li>Very specific tool for the TT Members job: Handle core language files changes.</li>
+		<li>Specific tool for the TT Members job: handles core language files changes.</li>
 		<li>Easy and fast configuration.</li>
-		<li>Client by client (administrator, site and installation) language selection to reports the diff is available.</li>
-		<li>Setting a baseline package we can test easy the diff different releases (from GitHUB or Joomla.org Project).</li>
+		<li>Client by client (administrator, site and installation) language selection.</li>
+		<li>Setting a baseline package we can test easily the diff different releases (from GitHub).</li>
 		<li>Files to add or delete are reported.</li>
 		<li>Keys to add, delete, revise or move are reported.</li>
-		<li>Non ini files (xml, en-GB.localise.php, etc) also can report the diff if present.</li>
-		<li>Commented lines and sections diff is also handled.</li>
-		<li>Reports with more exactitud than at GitHub. For example: Keys "to move", "to move and revise" or "text changes" improvemments</li>
-		<li>The reported and "easy to follow" info can to be displayed using normal joomla output inside an article.</li>
-		<li>Using custom URLs the module can display the diff from any release (including -dev, alpha, beta) to the previous release.</li>
-		<li>Allow store and handle history with the reported diff between same calls.</li>
-		<li>SHA ID is displayed when knowned Github URL pattern is detected.</li>
-		<li>And few more details at the reported info that can help when... TT Members Rock 'n' Roll time start! :D</li>
+		<li>Non ini files (xml, en-GB.localise.php, etc.) also report the diff if present.</li>
+		<li>Commented lines and sections diff are also handled.</li>
+		<li>Reports are more complete than Github diff. For example: Keys "to move", "to move and revise" or "text changes" improvements.</li>
+		<li>The report is to be displayed using normal joomla output inside an article containing a call to the module.<br>
+		First define a specific position, then add in the article '{loadposition diff} ' where 'diff' is the position.</li>
+		<li>Using custom URLs the module can display the diff between any release (including -dev, alpha, beta) and the previous release.</li>
+		<li>Allows storing and handling history of diffs to avoid repetitive packs downloads.</li>
+		<li>SHA ID is displayed when known Github URL pattern is detected.</li>
+		<li>And few more details in the reported info that can help when... TT Members Rock 'n' Roll time start! :D</li>
 		</ol>
-		<p></p>
-		<p></p>
-		<p></p>
-		<p></p>
 		<p>Enjoy it!</p>
 		]]>
 	</description>
 	<media destination="mod_ttm_diff_tool_otf" folder="media">
-		<filename>index.html</filename>
 		<folder>images</folder>
 		<folder>css</folder>
 	</media>
@@ -48,14 +44,15 @@
 		<folder>language</folder>
 		<folder>libraries</folder>
 		<folder>storage</folder>
+        <folder>models</folder>
+        <folder>vendor</folder>
 		<filename>helper.php</filename>
-		<filename>index.html</filename>
 		<filename>mod_ttm_diff_tool_otf.xml</filename>
 	</files>
 
 	<config>
 		<fields name="params">
-			<fieldset name="basic">
+			<fieldset addfieldpath="/modules/mod_ttm_diff_tool_otf/models/fields" name="basic">
 				<field
 					name="spacer"
 					type="spacer"
@@ -85,75 +82,12 @@
 						value="installation_selected">MOD_TTM_DIFF_TOOL_OTF_CLIENT_SELECTION_INSTALLATION_SELECTED</option>
         		</field>
 
-				<field
+        		<field
 					name="source_revision"
-					type="list"
-					default="STS_FROZEN_3.8.5"
+					type="releases"
 					label="MOD_TTM_DIFF_TOOL_OTF_SOURCE_REVISION_LABEL"
 					description="MOD_TTM_DIFF_TOOL_OTF_SOURCE_REVISION_DESC"
-					required="true">
-					<option 
-						value="CUSTOM_SR">MOD_TTM_DIFF_TOOL_OTF_SR_OPTION_CUSTOM</option>
-					<option
-						value="STS_FROZEN_3_8_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_5</option>
-					<option
-						value="STS_FROZEN_3_8_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_4</option>
-					<option
-						value="STS_FROZEN_3_8_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_3</option>
-					<option
-						value="STS_FROZEN_3_8_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_2</option>
-					<option
-						value="STS_FROZEN_3_8_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_1</option>
-					<option
-						value="STS_FROZEN_3_8_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_0</option>
-					<option
-						value="STS_FROZEN_3_7_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_7_0</option>
-					<option
-						value="STS_FROZEN_3_6_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_6_0</option>
-					<option
-						value="STS_FROZEN_3_5_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_5_0</option>
-					<option
-						value="STS_FROZEN_3_4_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_4_0</option>
-					<option 
-						value="STS_FROZEN_3_3_6">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_6</option>
-					<option 
-						value="STS_FROZEN_3_3_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_5</option>
-					<option 
-						value="STS_FROZEN_3_3_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_4</option>
-					<option 
-						value="STS_FROZEN_3_3_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_3</option>
-					<option 
-						value="STS_FROZEN_3_3_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_2</option>
-					<option 
-						value="STS_FROZEN_3_3_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_1</option>
-					<option 
-						value="STS_FROZEN_3_3_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_0</option>
-					<option 
-						value="STS_FROZEN_3_2_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_3</option>
-					<option 
-						value="STS_FROZEN_3_2_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_2</option>
-					<option 
-						value="STS_FROZEN_3_2_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_1</option>
-					<option 
-						value="STS_FROZEN_3_2_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_0</option>
-					<option 
-						value="STS_FROZEN_3_1_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_5</option>
-					<option 
-						value="STS_FROZEN_3_1_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_4</option>
-					<option 
-						value="STS_FROZEN_3_1_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_1</option>
-					<option 
-						value="STS_FROZEN_3_1_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_0</option>
-					<option 
-						value="STS_FROZEN_3_0_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_3</option>
-					<option 
-						value="STS_FROZEN_3_0_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_2</option>
-					<option 
-						value="STS_FROZEN_3_0_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_1</option>
-					<option 
-						value="STS_FROZEN_3_0_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_0</option>
-
-				</field>
+				/>
 
 				<field
 					name="custom_source_revision"
@@ -165,74 +99,10 @@
 
 				<field
 					name="target_revision"
-					type="list"
-					default="STS_DEV"
+					type="targetreleases"
 					label="MOD_TTM_DIFF_TOOL_OTF_TARGET_REVISION_LABEL"
 					description="MOD_TTM_DIFF_TOOL_OTF_TARGET_REVISION_DESC"
-					required="true">
-					<option 
-						value="CUSTOM_TR">MOD_TTM_DIFF_TOOL_OTF_TR_OPTION_CUSTOM</option>
-					<option 
-						value="STS_DEV">MOD_TTM_DIFF_TOOL_OTF_TR_OPTION_STS_DEV</option>
-					<option
-						value="STS_FROZEN_3_8_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_5</option>
-					<option
-						value="STS_FROZEN_3_8_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_4</option>
-					<option
-						value="STS_FROZEN_3_8_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_3</option>
-					<option
-						value="STS_FROZEN_3_8_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_2</option>
-					<option
-						value="STS_FROZEN_3_8_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_1</option>
-					<option
-						value="STS_FROZEN_3_8_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_8_0</option>
-					<option
-						value="STS_FROZEN_3_7_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_7_0</option>
-					<option
-						value="STS_FROZEN_3_6_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_6_0</option>
-					<option
-						value="STS_FROZEN_3_5_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_5_0</option>
-					<option
-						value="STS_FROZEN_3_4_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_4_0</option>
-					<option 
-						value="STS_FROZEN_3_3_6">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_6</option>
-					<option 
-						value="STS_FROZEN_3_3_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_5</option>
-					<option 
-						value="STS_FROZEN_3_3_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_4</option>
-					<option 
-						value="STS_FROZEN_3_3_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_3</option>
-					<option 
-						value="STS_FROZEN_3_3_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_2</option>
-					<option 
-						value="STS_FROZEN_3_3_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_1</option>
-					<option 
-						value="STS_FROZEN_3_3_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_3_0</option>
-					<option 
-						value="STS_FROZEN_3_2_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_3</option>
-					<option 
-						value="STS_FROZEN_3_2_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_2</option>
-					<option 
-						value="STS_FROZEN_3_2_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_1</option>
-					<option 
-						value="STS_FROZEN_3_2_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_2_0</option>
-					<option 
-						value="STS_FROZEN_3_1_5">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_5</option>
-					<option 
-						value="STS_FROZEN_3_1_4">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_4</option>
-					<option 
-						value="STS_FROZEN_3_1_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_1</option>
-					<option 
-						value="STS_FROZEN_3_1_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_1_0</option>
-					<option 
-						value="STS_FROZEN_3_0_3">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_3</option>
-					<option 
-						value="STS_FROZEN_3_0_2">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_2</option>
-					<option 
-						value="STS_FROZEN_3_0_1">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_1</option>
-					<option 
-						value="STS_FROZEN_3_0_0">MOD_TTM_DIFF_TOOL_OTF_OPTION_STS_FROZEN_3_0_0</option>
-				</field>
+				/>
 
 				<field
 					name="custom_target_revision"

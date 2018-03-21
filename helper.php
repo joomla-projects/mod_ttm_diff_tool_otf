@@ -17,7 +17,7 @@ abstract class modTtm_diff_tool_otfHelper
 	{
 		require_once(JPATH_ROOT . '/' . 'modules' . '/' . 'mod_ttm_diff_tool_otf' . '/' . 'libraries' . '/' . 'mod_ttm_diff_tool_otf_functions.php');
 		$diff_info = array();
-		$diff_info = get_diff_from_selected_packages($params);
+		$diff_info = ModTtm::get_diff_from_selected_packages($params);
 
 		return $diff_info;
 	}

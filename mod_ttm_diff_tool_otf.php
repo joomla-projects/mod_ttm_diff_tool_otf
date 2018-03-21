@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 require_once dirname(__FILE__) . '/helper.php';
+require_once JPATH_SITE . '/modules/mod_ttm_diff_tool_otf/vendor/autoload.php';
 
 $diff_info = modTtm_diff_tool_otfHelper::get_Diff_Info($params);
 
