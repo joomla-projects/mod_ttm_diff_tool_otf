@@ -41,7 +41,7 @@ class ModTtm
 		// Array of Joomla stable releases
 		$urls_to_frozen_joomla_releases = self::getReleases();
 
-		$known_zipball_urls = array ('LTS_DEV' =>
+		$known_zipball_urls = array('LTS_DEV' =>
 			array('https://github.com/joomla/joomla-cms/zipball/2.5.x' => 'https://api.github.com/repos/joomla/joomla-cms/git/refs/heads/2.5.x',
 			'https://github.com/joomla/joomla-cms/archive/2.5.x.zip' => 'https://api.github.com/repos/joomla/joomla-cms/git/refs/heads/2.5.x'),
 			'STS_DEV' =>
@@ -69,7 +69,7 @@ class ModTtm
 			$ecp = array();
 		}
 
-		$history_path = JPATH_ROOT . '/modules/mod_ttm_diff_tool_otf/storage/history';
+		$history_path   = JPATH_ROOT . '/modules/mod_ttm_diff_tool_otf/storage/history';
 
 		$allowed_groups = (array) $params->get('allowed_groups', null);
 		$user_groups    = JFactory::getUser()->get('groups');
@@ -220,8 +220,6 @@ class ModTtm
 			$set_target_name        = $target_pack_extra_data['set_name'];
 		}
 
-
-
 		// Unsetting non required vars.
 		$source_package = array();
 		$target_package = array();
@@ -230,29 +228,26 @@ class ModTtm
 		$now = JFactory::getDate();
 
 		$to_render .= "<h1 class='starting'>"
-					.JText::_('MOD_TTM_DIFF_TOOL_OTF_STARTING_ON')
-					.$now
+					.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_STARTING_ON', $now)
 					."</h1>";
 
 		$to_render .= "<p><span class='source_pack'>"
-					.JText::_('MOD_TTM_DIFF_TOOL_OTF_SP_NAME')
-					.$source_package_name
+					.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_SP_NAME', $source_package_name)
 					."</span></p>"
 					.$source_downloable_from;
 
 		$to_render .= "<p><span class='target_pack'>"
-					.JText::_('MOD_TTM_DIFF_TOOL_OTF_TP_NAME')
-					.$target_package_name
+					.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_TP_NAME', $target_package_name)
 					."</span></p>"
 					.$target_downloable_from;
 
-		// Callg to revise the changes between language files.
+		// Call to compare the changes between language files.
 		$changes    = self::revise_changes($unzipped_info, $client_selection, $ecp);
 
 		// Adding rendered changes.
 		$to_render .= $changes;
-		// Returning the rendered info to be dumped by the template file.
 
+		// Returning the rendered info to be dumped by the template file.
 		if ($allow_history == '1' && !empty($revise_history['both']['file_name']) && $is_deleting == 0)
 		{
 			if (JFile::exists($history_file_path))
@@ -261,13 +256,13 @@ class ModTtm
 			}
 			else
 			{
-				if (JFile::getExt ($history_file) == 'ttm')
+				if (JFile::getExt($history_file) == 'ttm')
 				{
-					$handle = fopen ($history_file_path, "w");
-					fwrite ($handle, $to_render);
-					fclose ($handle);
+					$handle = fopen($history_file_path, "w");
+					fwrite($handle, $to_render);
+					fclose($handle);
 
-					if (JFile::exists ($history_file_path))
+					if (JFile::exists($history_file_path))
 					{
 						// File is created
 						JError::raiseNotice( 100, '[HISTORY FILE ADDED] ' . htmlspecialchars($history_file));
@@ -283,6 +278,10 @@ class ModTtm
 		$data['config']['allow_history'] = $allow_history;
 
 		$data['history'] = self::get_history_files($history_path, $filter='\.ttm', $can_do_history);
+		
+		$to_render .= "<h1 class='starting'>"
+					.JText::_('MOD_TTM_DIFF_TOOL_OTF_ENDING')
+					."</h1>";
 		$data['content'] = $to_render;
 
 		return $data;
@@ -489,8 +488,7 @@ class ModTtm
 		{
 			$package['package_name'] = $package_extra_data['pack_name']['stored_pack_name_no_prefix'][$extra_data_dest];
 			$package['downloable_from'] = "<p><span class='downloable_from'>"
-				.JText::_('MOD_TTM_DIFF_TOOL_OTF_FROM')
-				.$joomla_link
+				.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_FROM', $joomla_link)
 				."</span></p>"
 				."<p>"
 				.JText::_('MOD_TTM_DIFF_TOOL_OTF_KNOWN_FROZEN_URL')
@@ -506,8 +504,7 @@ class ModTtm
 		{
 			$package['package_name'] = $package_extra_data['pack_name']['unstored_pack_name_no_prefix'][$extra_data_dest];
 			$package['downloable_from'] = "<p><span class='downloable_from'>"
-				.JText::_('MOD_TTM_DIFF_TOOL_OTF_FROM')
-				.$joomla_link
+				.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_FROM', $joomla_link)
 				."</span></p>"
 				."<p>"
 				.JText::_('MOD_TTM_DIFF_TOOL_OTF_MAYBE_FROZEN_URL')
@@ -523,7 +520,7 @@ class ModTtm
 		{
 			$package['package_name'] = $package_extra_data['pack_name']['zipball_pack_name_no_prefix'][$extra_data_dest];
 			$package['downloable_from'] = "<p><span class='downloable_from'>"
-				.JText::_('MOD_TTM_DIFF_TOOL_OTF_FROM')
+				.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_FROM', $joomla_link)
 				. $joomla_link
 				."/"
 				.$package['package_name']
@@ -543,8 +540,7 @@ class ModTtm
 		{
 			$package['package_name'] = $package_extra_data['pack_name']['zipball_pack_name_with_prefix'][$extra_data_dest];
 			$package['downloable_from'] = "<p><span class='downloable_from'>"
-				.JText::_('MOD_TTM_DIFF_TOOL_OTF_FROM')
-				. $joomla_link
+				.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_FROM', $joomla_link)
 				."/"
 				.$package['package_name']
 				."</span></p>"
@@ -574,7 +570,7 @@ class ModTtm
 
 			$package['package_name'] = $package_extra_data['pack_name']['unstored_pack_name_width_prefix'][$extra_data_dest];
 			$package['downloable_from'] = "<p><span class='downloable_from'>"
-				.JText::_('MOD_TTM_DIFF_TOOL_OTF_FROM')
+				.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_FROM', $joomla_link)
 				. $joomla_link
 				."</span></p>"
 				."<p>"
@@ -591,8 +587,7 @@ class ModTtm
 		{
 			$package['package_name'] = $package_extra_data['pack_name']['github_pack_name_with_prefix'][$extra_data_dest];
 			$package['downloable_from'] = "<p><span class='downloable_from'>"
-				.JText::_('MOD_TTM_DIFF_TOOL_OTF_FROM')
-				. $joomla_link
+				.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_FROM', $joomla_link)
 				."/"
 				.$package['package_name']
 				.".zip</span></p>"
@@ -958,38 +953,34 @@ class ModTtm
 
 						if (!empty($changes[$client]['files_to_add']))
 						{
+							$clientvalue = strtoupper(JText::_('MOD_TTM_DIFF_TOOL_OTF_' . strtoupper($client)));
+
 							sort($changes[$client]['files_to_add']);
 							$have_files_to_add[$client] = '1';
 							$pre_render['diff_file_names'][$client] .=
 										"<h3 class='files_to_add'>"
-										.JText::_('MOD_TTM_DIFF_TOOL_OTF_FILES_ADD_CLIENT')
-										.strtoupper (JText::_('MOD_TTM_DIFF_TOOL_OTF_'
-										.strtoupper ($client)))
+										.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_FILES_ADD_CLIENT', $clientvalue)
 										."</h3>";
 
 							foreach ($changes[$client]['files_to_add'] as $file_to_add)
 							{
 								$pre_render['diff_file_names'][$client] .=
 										"<p class='file_to_add'>["
-										.strtoupper (JText::_('MOD_TTM_DIFF_TOOL_OTF_'
-										.strtoupper ($client)))
+										.strtoupper(JText::_('MOD_TTM_DIFF_TOOL_OTF_' . strtoupper($client)))
 										."] - "
 										.$file_to_add
 										."</p>";
 
 								$pre_render['new_files_content'][$client] .=
 										"<p class='new_file'><span class='new_word'>["
-										.JText::_('MOD_TTM_DIFF_TOOL_OTF_NEW')
-										.strtoupper(JText::_('MOD_TTM_DIFF_TOOL_OTF_'
-										.strtoupper($client)))
-										.JText::_('MOD_TTM_DIFF_TOOL_OTF_FILE')
+										.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_NEW', $clientvalue)
 										."] </span>"
 										.$file_to_add
 										."</p>";
 
 								$pre_render['new_files_content'][$client] .=
 										"<pre class='new_file_content'>"
-										.htmlspecialchars ($target_files_content[$client][$file_to_add])
+										.htmlspecialchars($target_files_content[$client][$file_to_add])
 										."</pre>";
 								unset ($file_to_add);
 							}
@@ -997,47 +988,45 @@ class ModTtm
 						}
 						else
 						{
+							$clientvalue = strtoupper(JText::_('MOD_TTM_DIFF_TOOL_OTF_' . strtoupper($client)));
+							
 							$have_files_to_add[$client] = '0';
 							$pre_render['diff_file_names'][$client] .=
 										"<h3 class='no_files_to_add'>"
-										.JText::_('MOD_TTM_DIFF_TOOL_OTF_NO_FILES_ADD_CLIENT')
-										.strtoupper(JText::_('MOD_TTM_DIFF_TOOL_OTF_'
-										.strtoupper($client)))
+										.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_NO_FILES_ADD_CLIENT', $clientvalue)
 										."</h3>";
 						}
 
 						if (!empty($changes[$client]['files_to_delete']))
 						{
+							$clientvalue = strtoupper(JText::_('MOD_TTM_DIFF_TOOL_OTF_' . strtoupper($client)));
+							
 							sort($changes[$client]['files_to_delete']);
 							$have_files_to_delete[$client] = '1';
 							$pre_render['diff_file_names'][$client] .=
 										"<h3 class='files_to_delete'>"
-										.JText::_('MOD_TTM_DIFF_TOOL_OTF_FILES_DELETE_CLIENT')
-										.strtoupper(JText::_('MOD_TTM_DIFF_TOOL_OTF_'
-										.strtoupper($client)))
+										.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_FILES_DELETE_CLIENT', $clientvalue)
 										."</h3>";
 
 							foreach ($changes[$client]['files_to_delete'] as $file_to_delete)
 							{
 								$pre_render['diff_file_names'][$client] .=
 												"<p class='file_to_delete'>["
-												.strtoupper(JText::_('MOD_TTM_DIFF_TOOL_OTF_'
-												.strtoupper($client)))
+												.strtoupper(JText::_('MOD_TTM_DIFF_TOOL_OTF_' . strtoupper($client)))
 												."] "
 												.$file_to_delete
 												."</p>";
 								unset ($file_to_delete);
 							}
-
 						}
 						else
 						{
+							$clientvalue = strtoupper(JText::_('MOD_TTM_DIFF_TOOL_OTF_' . strtoupper($client)));
+
 							$have_files_to_delete[$client] = '0';
 							$pre_render['diff_file_names'][$client] .=
 										"<h3 class='no_files_to_delete'>"
-										.JText::_('MOD_TTM_DIFF_TOOL_OTF_NO_FILES_DELETE_CLIENT')
-										.strtoupper(JText::_('MOD_TTM_DIFF_TOOL_OTF_'
-										.strtoupper($client)))
+										.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_NO_FILES_DELETE_CLIENT', $clientvalue)
 										."</h3>";
 						}
 
@@ -1065,6 +1054,8 @@ class ModTtm
 
 							foreach ($changes[$client]['common_files'] as $common_file)
 							{
+								$clientvalue = strtoupper(JText::_('MOD_TTM_DIFF_TOOL_OTF_' . strtoupper($client)));
+
 								$sf_content = $source_files_content[$client][$common_file];
 								$tf_content = $target_files_content[$client][$common_file];
 
@@ -1102,9 +1093,7 @@ class ModTtm
 									{
 										$type_html .=
 											"<p class='new_file'><span class='new_word'>["
-											.strtoupper (JText::_('MOD_TTM_DIFF_TOOL_OTF_'
-											.strtoupper ($client)))
-											.JText::_('MOD_TTM_DIFF_TOOL_OTF_FILE_CHANGES')
+											.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_FILE_CHANGES', $clientvalue)
 											."] </span>"
 											.$common_file
 											."</p>";
@@ -1119,9 +1108,7 @@ class ModTtm
 									{
 										$type_xml .=
 											"<p class='new_file'><span class='new_word'>["
-											.strtoupper (JText::_('MOD_TTM_DIFF_TOOL_OTF_'
-											.strtoupper ($client)))
-											.JText::_('MOD_TTM_DIFF_TOOL_OTF_FILE_CHANGES')
+											.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_FILE_CHANGES', $clientvalue)
 											."] </span>"
 											.$common_file
 											."</p>";
@@ -1136,9 +1123,7 @@ class ModTtm
 									{
 										$type_php .=
 											"<p class='new_file'><span class='new_word'>["
-											.strtoupper (JText::_('MOD_TTM_DIFF_TOOL_OTF_'
-											.strtoupper ($client)))
-											.JText::_('MOD_TTM_DIFF_TOOL_OTF_FILE_CHANGES')
+											.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_FILE_CHANGES', $clientvalue)
 											."] </span>"
 											.$common_file
 											."</p>";
@@ -1153,9 +1138,7 @@ class ModTtm
 									{
 										$type_unusual .=
 											"<p class='new_file'><span class='new_word'>["
-											.strtoupper (JText::_('MOD_TTM_DIFF_TOOL_OTF_'
-											.strtoupper ($client)))
-											.JText::_('MOD_TTM_DIFF_TOOL_OTF_FILE_CHANGES')
+											.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_FILE_CHANGES', $clientvalue)
 											."] </span>"
 											.$common_file
 											."</p>";
@@ -1170,9 +1153,7 @@ class ModTtm
 									{
 										$type_ini .=
 											"<p class='new_file'><span class='new_word'>["
-											.strtoupper( JText::_('MOD_TTM_DIFF_TOOL_OTF_'
-											.strtoupper ($client)))
-											.JText::_('MOD_TTM_DIFF_TOOL_OTF_FILE_CHANGES')
+											.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_FILE_CHANGES', $clientvalue)
 											."] </span>"
 											.$common_file
 											."</p>";
@@ -1192,16 +1173,14 @@ class ModTtm
 							}
 
 							$comment_types_text  = array('to_add_text', 'to_delete_text');
-							$comment_types_name  = array('to_add_text' => 'Comments to add', 'to_delete_text' => 'Comments to delete');
+							$comment_types_name  = array('to_add_text' => JText::_('MOD_TTM_DIFF_TOOL_OTF_HAVE_COMMENTS_TO_ADD'), 'to_delete_text' => JText::_('MOD_TTM_DIFF_TOOL_OTF_HAVE_COMMENTS_TO_DELETE'));
 							$comments_to_exclude = '';
 
 							foreach($comment_types_text as $comment_type_text)
 							{
 								if (!empty($all_excluded_comments[$client][$comment_type_text]))
 								{
-									$comments_to_exclude .= 'The next <b>'
-												.$comment_types_name[$comment_type_text]
-												.'</b> have been <b>excluded</b> normaly due to masive changes to apply within all the ini files of this client:';
+									$comments_to_exclude .= JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_HAVE_COMMENTS_TO_EXCLUDE', $comment_types_name[$comment_type_text]);
 
 									if ($comment_type_text == 'to_add_text')
 									{
@@ -1250,8 +1229,7 @@ class ModTtm
 							$pre_render['diff_file_names'][$client] .=
 										"<h3 class='no_common_files'>"
 										."There are no common files at the client "
-										.strtoupper(JText::_('MOD_TTM_DIFF_TOOL_OTF_'
-										.strtoupper($client)))
+										.strtoupper(JText::_('MOD_TTM_DIFF_TOOL_OTF_' . strtoupper($client)))
 										."</h3>";
 						}
 					}
@@ -1448,10 +1426,9 @@ class ModTtm
 					{
 						$have_comments_to_add .=
 										"<p class='line_number'>"
-										.JText::_('MOD_TTM_DIFF_TOOL_OTF_LINE')
-										.htmlspecialchars ($target_lines['comments_lines_number'][$comment_to_add])
-										.":</p><p class='comment_to_add'>"
-										.htmlspecialchars ($comment_to_add)
+										.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_LINE', htmlspecialchars($target_lines['comments_lines_number'][$comment_to_add]))
+										."</p><p class='comment_to_add'>"
+										.htmlspecialchars($comment_to_add)
 										."</p>";
 					}
 
@@ -1497,10 +1474,9 @@ class ModTtm
 					{
 						$have_comments_to_delete .=
 										"<p class='line_number'>"
-										.JText::_('MOD_TTM_DIFF_TOOL_OTF_LINE')
-										.$source_lines['comments_lines_number'][$comment_to_delete]
-										.":</p><p class='comment_to_delete'>"
-										.htmlspecialchars ($comment_to_delete)
+										.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_LINE', $source_lines['comments_lines_number'][$comment_to_delete])
+										."</p><p class='comment_to_delete'>"
+										.htmlspecialchars($comment_to_delete)
 										."</p>";
 					}
 
@@ -1514,9 +1490,8 @@ class ModTtm
 				{
 					$have_sections_to_add .=
 									"<p class='line_number'>"
-									.JText::_('MOD_TTM_DIFF_TOOL_OTF_LINE')
-									.$target_lines['sections_lines_number'][$section_to_add]
-									.":</p><p class='section_to_add'>"
+									.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_LINE', $target_lines['sections_lines_number'][$section_to_add])
+									."</p><p class='section_to_add'>"
 									.htmlspecialchars ($section_to_add)
 									."</p>";
 					unset ($section_to_add);
@@ -1529,9 +1504,8 @@ class ModTtm
 				{
 					$have_sections_to_delete .=
 									"<p class='line_number'>"
-									.JText::_('MOD_TTM_DIFF_TOOL_OTF_LINE')
-									.$source_lines['sections_lines_number'][$section_to_delete]
-									.":</p><p class='section_to_delete'>"
+									.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_LINE', $source_lines['sections_lines_number'][$section_to_delete])
+									."</p><p class='section_to_delete'>"
 									.htmlspecialchars ($section_to_delete)
 									."</p>";
 					unset ($section_to_delete);
@@ -1544,10 +1518,9 @@ class ModTtm
 				{
 					$have_keys_to_add .=
 								"<p class='line_number'>"
-								.JText::_('MOD_TTM_DIFF_TOOL_OTF_LINE')
-								.$target_lines['keys_lines_number'][$key_to_add]
-								.":</p><p class='key_to_add'>"
-								.htmlspecialchars ($key_to_add
+								.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_LINE', $target_lines['keys_lines_number'][$key_to_add])
+								."</p><p class='key_to_add'>"
+								.htmlspecialchars($key_to_add
 								."="
 								.$target_lines['keys_text'][$key_to_add])
 								."</p>";
@@ -1561,10 +1534,9 @@ class ModTtm
 				{
 					$have_keys_to_delete .=
 								"<p class='line_number'>"
-								.JText::_('MOD_TTM_DIFF_TOOL_OTF_LINE')
-								.$source_lines['keys_lines_number'][$key_to_delete]
-								.":</p><p class='key_to_delete'>"
-								.htmlspecialchars ($key_to_delete
+								.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_LINE', $source_lines['keys_lines_number'][$key_to_delete])
+								."</p><p class='key_to_delete'>"
+								.htmlspecialchars($key_to_delete
 								."="
 								.$source_lines['keys_text'][$key_to_delete])
 								."</p>";
@@ -1596,12 +1568,9 @@ class ModTtm
 						{
 							$have_keys_to_move_and_revise .=
 										"<p class='line_number'>"
-										.JText::_('MOD_TTM_DIFF_TOOL_OTF_LINE')
-										.$source_line
-										.JText::_('MOD_TTM_DIFF_TOOL_OTF_TO')
-										.$target_line
-										.":</p><p class='key_to_move_and_revise'>"
-										.htmlspecialchars ($source_common_key)
+										.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_LINE_TO', $source_line, $target_line)
+										."</p><p class='key_to_move_and_revise'>"
+										.htmlspecialchars($source_common_key)
 										."</p><p class='text_changes'>"
 										.$text_changes."</p>";
 						}
@@ -1609,10 +1578,9 @@ class ModTtm
 						{
 							$have_keys_to_revise .=
 										"<p class='line_number'>"
-										.JText::_('MOD_TTM_DIFF_TOOL_OTF_LINE')
-										.$target_line
-										.":</p><p class='key_to_revise'>"
-										.htmlspecialchars ($source_common_key)
+										.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_LINE', $target_line)
+										."</p><p class='key_to_revise'>"
+										.htmlspecialchars($source_common_key)
 										."</p><p class='text_changes'>"
 										.$text_changes."</p>";
 						}
@@ -1621,14 +1589,11 @@ class ModTtm
 					{
 						$have_keys_to_move .=
 									"<p class='line_number'>"
-									.JText::_('MOD_TTM_DIFF_TOOL_OTF_LINE')
-									.$source_line
-									.JText::_('MOD_TTM_DIFF_TOOL_OTF_TO')
-									.$target_line
-									.":</p><p class='key_to_move'>"
-									.htmlspecialchars ($source_common_key)
+									.JText::sprintf('MOD_TTM_DIFF_TOOL_OTF_LINE_TO', $source_line, $target_line)
+									."</p><p class='key_to_move'>"
+									.htmlspecialchars($source_common_key)
 									."="
-									.htmlspecialchars ($target_text)
+									.htmlspecialchars($target_text)
 									."</p>";
 					}
 
@@ -1645,7 +1610,7 @@ class ModTtm
 				$have_changes = 1;
 				$detected_changes .=
 							"<p class='comments_to_delete'>"
-							.JText::_('MOD_TTM_DIFF_TOOL_OTF_HAVE_COMMENTS_TO_DELETE')
+							. strtoupper(JText::_('MOD_TTM_DIFF_TOOL_OTF_HAVE_COMMENTS_TO_DELETE'))
 							."</p>";
 				$detected_changes .= $have_comments_to_delete;
 			}
@@ -1655,8 +1620,8 @@ class ModTtm
 				$have_changes = 1;
 				$detected_changes .=
 							"<p class='comments_to_add'>"
-							.JText::_('MOD_TTM_DIFF_TOOL_OTF_HAVE_COMMENTS_TO_ADD')
-							."</p>";
+							. strtoupper(JText::_('MOD_TTM_DIFF_TOOL_OTF_HAVE_COMMENTS_TO_ADD'))
+							. "</p>";
 				$detected_changes .= $have_comments_to_add;
 			}
 
@@ -1850,14 +1815,14 @@ class ModTtm
 			// If ($test !== false)
 			if ($test != $link)
 			{
-				$file_to_load = $git_hub_target;
-				$github_data = self::get_raw_url_content ($file_to_load);
+				$file_to_load   = $git_hub_target;
+				$github_data    = self::get_raw_url_content ($file_to_load);
 				$gh_loaded_data = '';
 
 				if (empty($github_data))
 				{
-					//fclose($github_data);
-					//If denied by server github access, then use generic value
+					// fclose($github_data);
+					// If github accessdenied by server, then use generic value
 					$tested_parts = explode('/', $git_hub_target);
 					$part['name'] = end($tested_parts).'_'.date('Y-m-d');
 					$part['part_sha'] = '';
@@ -1881,14 +1846,14 @@ class ModTtm
 					{
 						list ($first_part, $brute_text) = explode ('"sha":"', $line_content, 2);
 
-						if (strpos ($brute_text, '"'))
+						if (strpos($brute_text, '"'))
 						{
-						list ($full_part['full_sha'], $resting_text) = explode ('"', $brute_text, 2);
-						$part['full_sha']=$full_part['full_sha'];
-						$part['part_sha']=substr($full_part['full_sha'], 0, -33);
-						$part['name']='';
+							list ($full_part['full_sha'], $resting_text) = explode ('"', $brute_text, 2);
+							$part['full_sha']=$full_part['full_sha'];
+							$part['part_sha']=substr($full_part['full_sha'], 0, -33);
+							$part['name']='';
 
-						return $part;
+							return $part;
 						}
 					}
 					unset ($line_content);
@@ -2076,10 +2041,11 @@ class ModTtm
 
 		if ($maxlen == 0) return array( array ('d' => $old, 'i' => $new));
 
-		return array_merge (
-			self::diff_TTM (array_slice ($old, 0, $omax), array_slice ($new, 0, $nmax)),
+		return array_merge(
+			self::diff_TTM(array_slice($old, 0, $omax), array_slice($new, 0, $nmax)),
 			array_slice ($new, $nmax, $maxlen),
-			self::diff_TTM (array_slice ($old, $omax + $maxlen), array_slice ($new, $nmax + $maxlen)));
+			self::diff_TTM(array_slice($old, $omax + $maxlen), array_slice($new, $nmax + $maxlen))
+			);
 	}
 
 	public static function htmlDiff_TTM($old, $new)
@@ -2179,7 +2145,7 @@ class ModTtm
 		catch (Exception $e)
 		{
 			JFactory::getApplication()->enqueueMessage(
-				JText::_('ERROR_GITHUB_GETTING_RELEASES'),
+				JText::_('MOD_TTM_DIFF_TOOL_OTF_ERROR_GITHUB_GETTING_RELEASES'),
 				'warning');
 		}
 
