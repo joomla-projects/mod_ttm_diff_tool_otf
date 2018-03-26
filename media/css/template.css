@@ -7,7 +7,7 @@ div.mod-ttm_diff_tool_otf del
 	background-color: #E3A0AB;
 }
 .starting {
-	font-size:2em !important;
+	font-size:1.8em !important;
 }
 .source_pack {
 	font-size:1.2em;
@@ -19,7 +19,7 @@ div.mod-ttm_diff_tool_otf del
 }
 .downloable_from {
 	border-width: 1px;
-	background: url("../images/down.png") no-repeat scroll 3px 3px #FFF5EB;
+	background: url("../images/down.png") no-repeat scroll 3px 3px;
 	border-bottom: 1px dotted #FFB4A0;
 	border-top: 1px dotted #FFB4A0;
 	line-height: 36px;
