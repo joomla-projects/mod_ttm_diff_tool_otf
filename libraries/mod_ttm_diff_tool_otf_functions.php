@@ -1962,23 +1962,6 @@ class ModTtm
 		return $content;
 	}
 
-	/*
-	Paul's Simple Diff Algorithm v 0.1
-	(C) Paul Butler 2007 <http://www.paulbutler.org/>
-	May be used and distributed under the zlib/libpng license.
-	This code is intended for learning purposes; it was written with short
-	code taking priority over performance. It could be used in a practical
-	application, but there are a few ways it could be optimized.
-	Given two arrays, the function diff will return an array of the changes.
-	I won't describe the format of the array, but it will be obvious
-	if you use print_r() on the result of a diff on some test data.
-	htmlDiff is a wrapper for the diff command, it takes two strings and
-	returns the differences in HTML. The tags used are <ins> and <del>,
-	which can easily be styled with CSS.
-
-	Modified a bit by valc
-	*/
-
 	public static function extract_file_content($lines = array())
 	{
 		$content = array();
@@ -2068,6 +2051,22 @@ class ModTtm
 		return $ret;
 	}
 
+	/*
+	Paul's Simple Diff Algorithm v 0.1
+	(C) Paul Butler 2007 <http://www.paulbutler.org/>
+	May be used and distributed under the zlib/libpng license.
+	This code is intended for learning purposes; it was written with short
+	code taking priority over performance. It could be used in a practical
+	application, but there are a few ways it could be optimized.
+	Given two arrays, the function diff will return an array of the changes.
+	I won't describe the format of the array, but it will be obvious
+	if you use print_r() on the result of a diff on some test data.
+	htmlDiff is a wrapper for the diff command, it takes two strings and
+	returns the differences in HTML. The tags used are <ins> and <del>,
+	which can easily be styled with CSS.
+
+	Modified a bit by valc
+	*/
 	public static function diff_TTM($old, $new)
 	{
 		$maxlen = 0;
