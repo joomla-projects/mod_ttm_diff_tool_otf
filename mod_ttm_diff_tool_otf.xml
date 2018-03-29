@@ -44,8 +44,8 @@
 		<folder>language</folder>
 		<folder>libraries</folder>
 		<folder>storage</folder>
-        <folder>models</folder>
-        <folder>vendor</folder>
+		<folder>models</folder>
+		<folder>vendor</folder>
 		<filename>helper.php</filename>
 		<filename>mod_ttm_diff_tool_otf.xml</filename>
 	</files>
@@ -56,33 +56,30 @@
 				<field
 					name="spacer"
 					type="spacer"
-					class="text"
 					label="MOD_TTM_DIFF_TOOL_OTF_REQUIRED_FIELDS_SPACER_LABEL"
 				/>
 
 				<field
-					name="spacer1"
-					type="spacer"
-					hr="true"
-				/>
-
-        		<field 
 					name="client_selection"
 					type="checkboxes"
 					size= "3"
 					default="admin_selected"
 					label="MOD_TTM_DIFF_TOOL_OTF_CLIENT_SELECTION_LABEL"
 					description="MOD_TTM_DIFF_TOOL_OTF_CLIENT_SELECTION_DESC"
-					required="true">
-                			<option
-						value="admin_selected">MOD_TTM_DIFF_TOOL_OTF_CLIENT_SELECTION_ADMIN_SELECTED</option>
-                			<option
-						value="site_selected">MOD_TTM_DIFF_TOOL_OTF_CLIENT_SELECTION_SITE_SELECTED</option>
-                			<option
-						value="installation_selected">MOD_TTM_DIFF_TOOL_OTF_CLIENT_SELECTION_INSTALLATION_SELECTED</option>
-        		</field>
+					required="true"
+					>
+					<option value="admin_selected">MOD_TTM_DIFF_TOOL_OTF_CLIENT_SELECTION_ADMIN_SELECTED</option>
+					<option value="site_selected">MOD_TTM_DIFF_TOOL_OTF_CLIENT_SELECTION_SITE_SELECTED</option>
+					<option value="installation_selected">MOD_TTM_DIFF_TOOL_OTF_CLIENT_SELECTION_INSTALLATION_SELECTED</option>
+				</field>
 
-        		<field
+				<field
+					name="spacer1"
+					type="spacer"
+					label="MOD_TTM_DIFF_TOOL_OTF_NOTE_LABEL"
+				/>
+
+				<field
 					name="source_revision"
 					type="releases"
 					label="MOD_TTM_DIFF_TOOL_OTF_SOURCE_REVISION_LABEL"
@@ -95,6 +92,7 @@
 					default=""
 					label="MOD_TTM_DIFF_TOOL_OTF_SR_CUSTOM_VALUE_LABEL"
 					description="MOD_TTM_DIFF_TOOL_OTF_SR_CUSTOM_VALUE_DESC"
+					showon="source_revision:CUSTOM_SR"
 				/>
 
 				<field
@@ -110,25 +108,14 @@
 					default=""
 					label="MOD_TTM_DIFF_TOOL_OTF_TR_CUSTOM_VALUE_LABEL"
 					description="MOD_TTM_DIFF_TOOL_OTF_TR_CUSTOM_VALUE_DESC"
+					showon="target_revision:CUSTOM_TR"
 				/>
 
 				<field
 					name="spacer2"
 					type="spacer"
-					hr="true"
-				/>
-
-				<field
-					name="spacer3"
-					type="spacer"
 					class="text"
 					label="MOD_TTM_DIFF_TOOL_OTF_HISTORY_OPTIONS_LABEL"
-				/>
-
-				<field
-					name="spacer4"
-					type="spacer"
-					hr="true"
 				/>
 
 				<field
@@ -136,11 +123,10 @@
 					type="list"
 					default="0"
 					label="MOD_TTM_DIFF_TOOL_OTF_ALLOW_HISTORY_LABEL"
-					description="MOD_TTM_DIFF_TOOL_OTF_ALLOW_HISTORY_DESC">
-					<option
-						value="1">MOD_TTM_DIFF_TOOL_OTF_OPTION_YES</option>
-					<option
-						value="0">MOD_TTM_DIFF_TOOL_OTF_OPTION_NO</option>
+					description="MOD_TTM_DIFF_TOOL_OTF_ALLOW_HISTORY_DESC"
+					>
+					<option value="1">MOD_TTM_DIFF_TOOL_OTF_OPTION_YES</option>
+					<option value="0">MOD_TTM_DIFF_TOOL_OTF_OPTION_NO</option>
 				</field>
 
 				<field name="allowed_groups" type="usergroup"
@@ -158,9 +144,7 @@
 					label="MOD_TTM_DIFF_TOOL_OTF_ECP_LABEL"
 					description="MOD_TTM_DIFF_TOOL_OTF_ECP_DESC"
 				/>
-
 			</fieldset>
-
 			<fieldset name="advanced">
 				<field
 					name="layout"
@@ -181,11 +165,10 @@
 					type="list"
 					default="1"
 					label="COM_MODULES_FIELD_CACHING_LABEL"
-					description="COM_MODULES_FIELD_CACHING_DESC">
-					<option
-						value="1">JGLOBAL_USE_GLOBAL</option>
-					<option
-						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+					description="COM_MODULES_FIELD_CACHING_DESC"
+					>
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
 				</field>
 				
 				<field
@@ -199,9 +182,9 @@
 				<field
 					name="cachemode"
 					type="hidden"
-					default="itemid">
-					<option
-						value="itemid"></option>
+					default="itemid"
+					>
+					<option value="itemid"></option>
 				</field>
 			</fieldset>
 		</fields>
