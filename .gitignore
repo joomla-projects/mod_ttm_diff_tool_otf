@@ -1,1 +1,7 @@
 .idea
+
+# Don't commit unneeded files added by composer
+/vendor/joomla/github/.github
+/vendor/joomla/github/Tests
+/vendor/joomla/http/.github
+/vendor/joomla/http/Tests
