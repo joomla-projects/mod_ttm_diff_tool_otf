@@ -10,6 +10,9 @@
 defined('_JEXEC') or die;
 
 use Joomla\Github\Github;
+use Joomla\CMS\HTML\HTMLHelper;
+
+HTMLHelper::_('stylesheet', 'mod_ttm_diff_tool_otf/template.css', ['version' => 'auto', 'relative' => true]);
 
 JFormHelper::loadFieldClass('list');
 

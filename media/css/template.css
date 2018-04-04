@@ -204,3 +204,6 @@ f	ont-size: 1.5em;
 	font-size: 1.1em;
 	color:black !important;
 }
+.col-md-9 .field-spacer > .control-label {
+	width: auto;
+}
