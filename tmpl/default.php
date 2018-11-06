@@ -5,9 +5,13 @@
  * GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-// no direct access
-defined('_JEXEC') or die('Restricted access');
-JHtml::_('stylesheet', 'mod_ttm_diff_tool_otf/template.css', array(), true);
+defined('_JEXEC') or die;
+
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+
+HTMLHelper::_('stylesheet', 'mod_ttm_diff_tool_otf/template.css', ['version' => 'auto', 'relative' => true]);
+
 ?>
 <div class="mod-ttm_diff_tool_otf<?php echo $moduleclass_sfx ?>">
 	<?php
@@ -44,16 +48,18 @@ JHtml::_('stylesheet', 'mod_ttm_diff_tool_otf/template.css', array(), true);
 		'useCookie'    => true, // this must not be a string. Don't use quotes.
 	);
 
-	echo JHtml::_('tabs.start', 'tab_group_id', $options);
-	echo JHtml::_('tabs.panel', JText::_('MOD_TTM_DIFF_TOOL_OTF_PANEL_1_TITLE'), 'panel_1_id');
+	echo HTMLHelper::_('uitab.startTabSet', 'myTab', $options);
+	echo HTMLHelper::_('uitab.addTab', 'myTab', 'panel_1_id', Text::_('MOD_TTM_DIFF_TOOL_OTF_PANEL_1_TITLE'));
 	echo $diff_info['content'];
+	echo HTMLHelper::_('uitab.endTab');
 
 	if ($diff_info['config']['allow_history'] == '1')
 	{
-		echo JHtml::_('tabs.panel', JText::_('MOD_TTM_DIFF_TOOL_OTF_PANEL_2_TITLE'), 'panel_2_id');
+		echo HTMLHelper::_('uitab.addTab', 'myTab', 'panel_2_id', Text::_('MOD_TTM_DIFF_TOOL_OTF_PANEL_2_TITLE'));
 		echo $diff_info['history'];
+		echo HTMLHelper::_('uitab.endTab');
 	}
 
-	echo JHtml::_('tabs.end');
+	echo HTMLHelper::_('uitab.endTabSet');
 	?>
 </div>

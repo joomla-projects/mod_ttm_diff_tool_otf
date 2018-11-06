@@ -10,11 +10,15 @@
 defined('_JEXEC') or die;
 
 use Joomla\Github\Github;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Form\FormHelper;
+use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\Registry\Registry;
 
 HTMLHelper::_('stylesheet', 'mod_ttm_diff_tool_otf/template.css', ['version' => 'auto', 'relative' => true]);
 
-JFormHelper::loadFieldClass('list');
+FormHelper::loadFieldClass('list');
 
 /**
  * Form Field Place class.
@@ -24,7 +28,7 @@ JFormHelper::loadFieldClass('list');
  *
  * @since       1.0
  */
-class JFormFieldReleases extends JFormFieldList
+class JFormFieldReleases extends \JFormFieldList
 {
 	/**
 	 * The field type.
@@ -47,7 +51,7 @@ class JFormFieldReleases extends JFormFieldList
 		$gh_user       = 'joomla';
 		$gh_project    = 'joomla-cms';
 
-		$options = new JRegistry;
+		$options = new Registry;
 
 		// Trying with a 'read only' public repositories token
 		// But base 64 encoded to avoid Github alarms sharing it.
@@ -101,8 +105,8 @@ class JFormFieldReleases extends JFormFieldList
 		}
 		catch (Exception $e)
 		{
-			JFactory::getApplication()->enqueueMessage(
-				JText::_('ERROR_GITHUB_GETTING_RELEASES'),
+			Factory::getApplication()->enqueueMessage(
+				Text::_('ERROR_GITHUB_GETTING_RELEASES'),
 				'warning');
 		}
 
@@ -117,12 +121,12 @@ class JFormFieldReleases extends JFormFieldList
 
 		foreach ($this->element->children() as $option)
 		{
-			$options[] = JHtml::_('select.option', $option->attributes('value'), JText::_(trim($option)),
+			$options[] = HTMLHelper::_('select.option', $option->attributes('value'), Text::_(trim($option)),
 								array('option.attr' => 'attributes', 'attr' => '')
 								);
 		}
 
-		$options[] = JHtml::_('select.option', 'CUSTOM_SR', JText::_('MOD_TTM_DIFF_TOOL_OTF_SR_OPTION_CUSTOM'),
+		$options[] = HTMLHelper::_('select.option', 'CUSTOM_SR', Text::_('MOD_TTM_DIFF_TOOL_OTF_SR_OPTION_CUSTOM'),
 							array('option.attr' => 'attributes')
 							);
 
@@ -130,7 +134,7 @@ class JFormFieldReleases extends JFormFieldList
 		{
 			if (!empty($version))
 			{
-				$options[] = JHtml::_('select.option', $version, sprintf('Joomla %s', $version),
+				$options[] = HTMLHelper::_('select.option', $version, sprintf('Joomla %s', $version),
 							array('option.attr' => 'attributes')
 							);
 			}

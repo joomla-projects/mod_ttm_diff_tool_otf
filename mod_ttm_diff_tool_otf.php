@@ -8,6 +8,8 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Helper\ModuleHelper;
+
 require_once dirname(__FILE__) . '/helper.php';
 require_once dirname(__FILE__) . '/vendor/autoload.php';
 
@@ -15,4 +17,4 @@ $diff_info = modTtm_diff_tool_otfHelper::get_Diff_Info($params);
 
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
 
-require JModuleHelper::getLayoutPath('mod_ttm_diff_tool_otf', $params->get('layout', 'default'));
+require ModuleHelper::getLayoutPath('mod_ttm_diff_tool_otf', $params->get('layout', 'default'));

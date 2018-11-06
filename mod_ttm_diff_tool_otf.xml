@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension
-	type="module" version="3.8" client="site" method="upgrade">
+	type="module" version="4.0" client="site" method="upgrade">
 	<name>mod_ttm_diff_tool_otf</name>
 	<author>Valc (Rafa Gómez)</author>
 	<creationDate>Aug 2013</creationDate>
@@ -9,7 +9,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail></authorEmail>
 	<authorUrl></authorUrl>
-	<version>3.8.6</version>
+	<version>4.0.0</version>
 	<description><![CDATA[
 		<h2>The module has been successfully installed in the Joomla 3 series</h2>
 		This tool provide an easy way to know the changes applied between core language files revisions, getting the info on the fly from the full packages depending on the module configuration.<br/><br/>Features:<br/>

@@ -10,8 +10,13 @@
 defined('_JEXEC') or die;
 
 use Joomla\Github\Github;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Form\FormHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\Registry\Registry;
 
-JFormHelper::loadFieldClass('list');
+FormHelper::loadFieldClass('list');
 
 /**
  * Form Field Place class.
@@ -21,7 +26,7 @@ JFormHelper::loadFieldClass('list');
  *
  * @since       1.0
  */
-class JFormFieldTargetReleases extends JFormFieldList
+class JFormFieldTargetReleases extends \JFormFieldList
 {
 	/**
 	 * The field type.
@@ -44,7 +49,7 @@ class JFormFieldTargetReleases extends JFormFieldList
 		$gh_user       = 'joomla';
 		$gh_project    = 'joomla-cms';
 
-		$options = new JRegistry;
+		$options = new Registry;
 
 		// Trying with a 'read only' public repositories token
 		// But base 64 encoded to avoid Github alarms sharing it.
@@ -98,8 +103,8 @@ class JFormFieldTargetReleases extends JFormFieldList
 		}
 		catch (Exception $e)
 		{
-			JFactory::getApplication()->enqueueMessage(
-				JText::_('ERROR_GITHUB_GETTING_RELEASES'),
+			Factory::getApplication()->enqueueMessage(
+				Text::_('ERROR_GITHUB_GETTING_RELEASES'),
 				'warning');
 		}
 
@@ -114,16 +119,16 @@ class JFormFieldTargetReleases extends JFormFieldList
 
 		foreach ($this->element->children() as $option)
 		{
-			$options[] = JHtml::_('select.option', $option->attributes('value'), JText::_(trim($option)),
+			$options[] = HTMLHelper::_('select.option', $option->attributes('value'), Text::_(trim($option)),
 								array('option.attr' => 'attributes', 'attr' => '')
 								);
 		}
 
-		$options[] = JHtml::_('select.option', 'STS_DEV', JText::_('MOD_TTM_DIFF_TOOL_OTF_TR_OPTION_STS_DEV'),
+		$options[] = HTMLHelper::_('select.option', 'STS_DEV', Text::_('MOD_TTM_DIFF_TOOL_OTF_TR_OPTION_STS_DEV'),
 							array('option.attr' => 'attributes')
 							);
 
-		$options[] = JHtml::_('select.option', 'CUSTOM_TR', JText::_('MOD_TTM_DIFF_TOOL_OTF_TR_OPTION_CUSTOM'),
+		$options[] = HTMLHelper::_('select.option', 'CUSTOM_TR', Text::_('MOD_TTM_DIFF_TOOL_OTF_TR_OPTION_CUSTOM'),
 							array('option.attr' => 'attributes')
 							);
 
@@ -131,7 +136,7 @@ class JFormFieldTargetReleases extends JFormFieldList
 		{
 			if (!empty($version))
 			{
-				$options[] = JHtml::_('select.option', $version, sprintf('Joomla %s', $version),
+				$options[] = HTMLHelper::_('select.option', $version, sprintf('Joomla %s', $version),
 							array('option.attr' => 'attributes')
 							);
 			}
