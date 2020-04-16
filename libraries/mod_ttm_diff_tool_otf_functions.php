@@ -736,6 +736,7 @@ class ModTtm
 		$urls_to_frozen_joomla_releases = array(),
 		$known_zipball_urls = array())
 	{
+		ini_set('max_execution_time', 0);
 		$extracted_zipped_info = array();
 		$extra_data            = array();
 		//Random number to add at the temp dir path.
